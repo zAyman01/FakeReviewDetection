@@ -8,5 +8,4 @@ tqdm
 matplotlib
 seaborn
 wordcloud
-
-
+tensorflow
