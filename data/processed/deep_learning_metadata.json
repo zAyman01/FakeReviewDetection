@@ -1,0 +1,9 @@
+{
+    "max_words": 10000,
+    "max_len": 105,
+    "embedding_dim": 128,
+    "test_accuracy": 0.9076295495033264,
+    "test_loss": 0.23071856796741486,
+    "roc_auc": 0.9695137435770219,
+    "seed": 42
+}
