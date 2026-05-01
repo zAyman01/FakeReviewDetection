@@ -1,138 +1,97 @@
-# Fake Product Review Detection using Natural Language Processing
+# Fake Product Review Detection System
+
+![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)
+![Scikit-Learn](https://img.shields.io/badge/sklearn-1.3%2B-orange.svg)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-red.svg)
+![Status](https://img.shields.io/badge/Status-Completed-success.svg)
 
 ## Project Overview
+This project is a comprehensive Natural Language Processing (NLP) solution designed to distinguish between **Real (Original - OR)** and **Fake (Computer-Generated - CG)** product reviews. By leveraging a variety of Machine Learning and Deep Learning architectures, the system identifies the subtle "fingerprints" of synthetic text to maintain trust in digital marketplaces.
 
-This project aims to develop a Natural Language Processing (NLP) system capable of detecting whether a product review is genuine or fabricated. Fake reviews are widely used to influence purchasing decisions, and identifying them is important for maintaining trust in online platforms.
-
-The system analyzes textual data and applies multiple machine learning and deep learning models to classify reviews as either **fake** or **real**.
-
----
-
-## Objectives
-
-* Apply NLP techniques to analyze textual reviews
-* Perform preprocessing to clean and standardize input data
-* Train and evaluate five different classification models
-* Compare model performance
-* Provide a simple graphical user interface (GUI) for user interaction
-
----
-
-## Models
-
-The project includes five different models, each implemented separately:
-
-* Logistic Regression
-* Naive Bayes
-* Support Vector Machine (SVM)
-* Random Forest
-* LSTM / GRU (Deep Learning)
-
-Each model processes the same input and produces an independent prediction.
-
----
-
-## System Workflow
-
-1. **Input**
-   The user enters a product review through the graphical interface.
-
-2. **Preprocessing**
-   The text will be cleaned and prepared using standard NLP techniques, including:
-
-   * Lowercasing
-   * Removing punctuation and stopwords
-   * Tokenization
-   * Optional stemming or lemmatization
-
-3. **Feature Extraction**
-   Text data will be converted into numerical representations:
-
-   * TF-IDF for traditional machine learning models
-   * Word embeddings for deep learning models
-
-4. **Prediction**
-   Each of the five models analyzes the processed input and generates a classification result.
-
-5. **Output**
-   The system displays the predictions from all models in the interface.
-
----
-
-## User Interface
-
-The project includes a simple graphical user interface that allows the user to:
-
-* Enter a review
-* Trigger processing through a button
-* View predictions from all five models
-
----
-
-## Dataset
-
-The project uses a dataset of product reviews containing:
-
-* Review text
-* Corresponding labels (fake or real)
-
-This dataset is used for training and evaluating all models.
-
----
+## Key Features
+- **Multi-Model Ensemble:** Implements five distinct algorithms to ensure robust detection.
+- **Unified Pipeline:** A standardized workflow from raw data ingestion to model persistence.
+- **Modern GUI:** A user-friendly Tkinter-based interface for real-time review analysis.
+- **Interactive Notebooks:** Documented exploratory data analysis and model tuning.
+- **Automated Visualization:** Every notebook generates performance charts (Confusion Matrices, ROC Curves) saved directly to the project.
 
 ## Project Structure
-
 ```text
 FakeReviewDetection/
-├── main.py
-├── requirements.txt
-├── README.md
+├── main.py                 # Main GUI Application
+├── test_models.py          # Backend connectivity test script
+├── requirements.txt        # Project dependencies
 ├── data/
-│   └── .gitkeep
-└── notebooks/
-    ├── logistic_regression.ipynb
-    ├── naive_bayes.ipynb
-    ├── svm.ipynb
-    ├── random_forest.ipynb
-    └── lstm_gru.ipynb
+│   ├── raw/                # Original dataset (fake_reviews.csv)
+│   ├── preprocessed/       # Cleaned text data
+│   └── processed/          # TF-IDF features and labels
+├── notebooks/              # Standardized Jupyter Notebooks
+│   ├── preprocessing_eda.ipynb
+│   ├── tfidf.ipynb
+│   ├── logistic_regression.ipynb
+│   ├── naive_bayes.ipynb
+│   ├── svm.ipynb
+│   ├── random_forest.ipynb
+│   └── lstm_gru.ipynb
+├── models/                 # Trained model artifacts (.pkl, .keras, .json)
+└── figures/                # Exported visualizations and evaluation charts
 ```
 
----
+## Algorithms & Performance
+The system compares several approaches to identify the most effective detection method:
 
-## Current Status
+| Model | Feature Extraction | Accuracy |
+| :--- | :--- | :--- |
+| **Support Vector Machine (SVM)** | TF-IDF (Unigrams-Trigrams) | **91.26%** |
+| **Logistic Regression** | TF-IDF (Unigrams-Trigrams) | 91.06% |
+| **Deep Learning (LSTM/GRU)** | Word Embeddings (Keras) | 90.23% |
+| **Random Forest** | TF-IDF (Unigrams-Trigrams) | 89.17% |
+| **Complement Naive Bayes** | TF-IDF (Unigrams-Trigrams) | 88.52% |
 
-* Initial project structure has been created
-* GUI placeholder is implemented
-* Model notebooks are prepared for development
+## Installation & Setup
 
-Planned work includes:
+1. **Clone the repository:**
+   ```powershell
+   git clone https://github.com/zAyman01/FakeReviewDetection.git
+   cd FakeReviewDetection
+   ```
 
-* Implementing preprocessing pipeline
-* Training and evaluating models
-* Integrating models with the GUI
+2. **Set up a virtual environment:**
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
 
----
+3. **Install dependencies:**
+   ```powershell
+   pip install -r requirements.txt
+   ```
 
-## How to Run
+## Usage
 
+### Running the GUI
+Launch the interactive detection tool:
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
 python main.py
 ```
 
----
+### Running the Notebooks
+To retrain models or explore the data:
+1. Open Jupyter Lab/Notebook.
+2. Run notebooks in order: `preprocessing_eda.ipynb` -> `tfidf.ipynb` -> Model Notebooks.
 
-## Future Work
+### Verification
+Run the automated test script to verify all backend components:
+```powershell
+python test_models.py
+```
 
-* Improve model performance using advanced preprocessing techniques
-* Add evaluation metrics such as accuracy, precision, recall, and F1-score
-* Enhance the graphical interface
-* Deploy the system as a web-based application
+## Visualizations
+Detailed performance metrics are available in the `figures/` directory, including:
+- **Class Distributions:** Understanding the balance between OR and CG reviews.
+- **Confusion Matrices:** Visualizing True Positives vs. False Positives for every model.
+- **Feature Importance:** Identifying the top words that trigger fake review detection.
+- **Training History:** Loss and Accuracy curves for the Deep Learning model.
 
----
-
-## Team Responsibility
-
-Each team member is responsible for implementing and evaluating one of the five models, in accordance with the project requirements.
+## License
+This project is developed for educational and research purposes in the field of NLP and Fake Content Detection.
